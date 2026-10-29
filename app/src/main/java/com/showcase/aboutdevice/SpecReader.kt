@@ -26,6 +26,11 @@ data class Specs(
 object SpecReader {
     private fun f(fmt: String, vararg a: Any) = String.format(Locale.US, fmt, *a)
 
+    private fun prop(key: String): String = try {
+        val p = Runtime.getRuntime().exec(arrayOf("getprop", key))
+        p.inputStream.bufferedReader().use { it.readText() }.trim()
+    } catch (e: Throwable) { "" }
+
     private fun prettySoc(): String {
         val model = if (Build.VERSION.SDK_INT >= 31) Build.SOC_MODEL else Build.HARDWARE
         val map = mapOf(
@@ -118,7 +123,7 @@ object SpecReader {
             patch = Build.VERSION.SECURITY_PATCH ?: "-",
             build = Build.DISPLAY,
             marketName = listOf("ro.vendor.oplus.market.name", "ro.oppo.market.name", "ro.product.marketname", "ro.product.vendor.marketname")
-                .map { prop(it) }.firstOrNull { it.isNotBlank() } ?: name
+                .map { k -> prop(k) }.firstOrNull { v -> v.isNotBlank() } ?: name
         )
     }
 }
