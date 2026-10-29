@@ -49,7 +49,8 @@ fun App(s: Specs) {
         HorizontalPager(pager, Modifier.fillMaxSize()) { page ->
             when (skins[page]) {
                 Skin.COLOROS17 -> ColorOS17Screen(s, p)
-                Skin.COLOROS15, Skin.OXYGEN15, Skin.REALME7 -> CardsScreen(skins[page], s, p)
+                Skin.COLOROS16, Skin.COLOROS15 -> OppoIdScreen(skins[page], s, p)
+                Skin.OXYGEN15, Skin.REALME7 -> CardsScreen(skins[page], s, p)
                 Skin.HYPEROS4 -> HyperOSScreen(s, p)
                 Skin.ORIGIN6 -> OriginScreen(s, p)
             }

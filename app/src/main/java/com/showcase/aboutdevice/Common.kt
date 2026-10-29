@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 enum class Skin(val label: String) {
-    COLOROS17("ColorOS 17"), COLOROS15("ColorOS 15"), OXYGEN15("OxygenOS 15"),
+    COLOROS17("ColorOS 17"), COLOROS16("ColorOS 16"), COLOROS15("ColorOS 15"), OXYGEN15("OxygenOS 15"),
     REALME7("realme UI 7"), HYPEROS4("HyperOS 4"), ORIGIN6("OriginOS 6")
 }
 

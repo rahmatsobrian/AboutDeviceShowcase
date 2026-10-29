@@ -19,7 +19,8 @@ data class Specs(
     val ram: String, val ramExt: String?,
     val used: String, val total: String, val usedFrac: Float,
     val battery: String, val front: String, val rear: String,
-    val display: String, val android: String, val patch: String, val build: String
+    val display: String, val android: String, val patch: String, val build: String,
+    val marketName: String
 )
 
 object SpecReader {
@@ -37,6 +38,8 @@ object SpecReader {
             "SM7675" to "Snapdragon® 7+ Gen 3 Mobile Platform",
             "SM8635" to "Snapdragon® 8s Gen 3 Mobile Platform",
             "SM8735" to "Snapdragon® 8s Gen 4 Mobile Platform",
+            "SM6225" to "Qualcomm® Snapdragon™ 680 Octa-core",
+            "SM6225-AD" to "Qualcomm® Snapdragon™ 685 Octa-core",
             "MT6993" to "MediaTek Dimensity 9500",
             "MT6991" to "MediaTek Dimensity 9400",
             "MT6989" to "MediaTek Dimensity 9300",
@@ -113,7 +116,9 @@ object SpecReader {
             display = f("%.1f in", inch),
             android = "Android ${Build.VERSION.RELEASE}",
             patch = Build.VERSION.SECURITY_PATCH ?: "-",
-            build = Build.DISPLAY
+            build = Build.DISPLAY,
+            marketName = listOf("ro.vendor.oplus.market.name", "ro.oppo.market.name", "ro.product.marketname", "ro.product.vendor.marketname")
+                .map { prop(it) }.firstOrNull { it.isNotBlank() } ?: name
         )
     }
 }
